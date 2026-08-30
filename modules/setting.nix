@@ -1,5 +1,5 @@
 { config, pkgs, ... }:{
-  {
+  
     nix.gc = {
       automatic = true;
       dates = "weekly"; 
@@ -10,5 +10,5 @@
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     nixpkgs.config.allowUnfree = true;
     nix.settings.trusted-users = [ "root" "flow" ];
-  }
+  
 }

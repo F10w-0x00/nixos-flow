@@ -1,5 +1,5 @@
 { config, pkgs, ... }:{
-  {
+ 
     boot.loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -16,5 +16,5 @@
       "acpi_backlight=vendor"
       "nowatchdog"
     ];
-  }
+  
 }

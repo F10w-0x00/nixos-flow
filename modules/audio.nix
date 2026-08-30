@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
 
-  {
+  
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -16,5 +16,5 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
       };
-  }
+  
 }

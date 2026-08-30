@@ -4,7 +4,7 @@
       ./waybar.nix # 引入同目录下的 waybar
     ];
 
-  {
+  
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -52,5 +52,5 @@
         ];
       };
     };
-  }
+  
 }

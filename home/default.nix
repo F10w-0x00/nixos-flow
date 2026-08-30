@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }: {
 
-  {
+
     imports = [
       ./alacritty
       ./hyprland
@@ -15,5 +15,5 @@
   
 
     programs.home-manager.enable = true;
-  }
+  
 }

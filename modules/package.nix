@@ -1,5 +1,5 @@
 { inputs, pkgs, ... }:{
-  {
+  
     programs.zsh.enable = true;
 
     services.displayManager.ly.enable = true;
@@ -42,7 +42,7 @@
 
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
     ]; 
 
 
@@ -56,5 +56,5 @@
 
 
     programs.nix-ld.enable = true;
-  }
+  
 }

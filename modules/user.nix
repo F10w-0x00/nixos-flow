@@ -1,6 +1,6 @@
 { pkgs, ... }:{
   
-  {
+  
     users.users.flow = {
       isNormalUser = true;
       description = "flow";
@@ -12,5 +12,5 @@
       shell = pkgs.zsh;
     
     };
-  }
+  
 }
