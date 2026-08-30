@@ -12,6 +12,9 @@
         configurationLimit = 3;
       };
     };
-    boot.kernelParams = [ "acpi_backlight=vendor" ];
+    boot.kernelParams = [ 
+      "acpi_backlight=vendor"
+      "nowatchdog"
+    ];
   }
 }
