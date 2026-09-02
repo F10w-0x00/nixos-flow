@@ -1,20 +1,26 @@
-{ config, pkgs, ... }:{
- 
-    boot.loader = {
-      efi = {
-        canTouchEfiVariables = true;
-      };
-      grub = {
-        enable = true;
-        efiSupport = true;
-        device = "nodev";
-        useOSProber = true;
-        configurationLimit = 3;
-      };
+{ config, pkgs, ... }:
+{
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
     };
-    boot.kernelParams = [ 
-      "acpi_backlight=vendor"
-      "nowatchdog"
-    ];
-  
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+      useOSProber = true;
+      configurationLimit = 3;
+    };
+  };
+
+  boot.kernelParams = [
+    "acpi_backlight=vendor"
+    "nowatchdog"
+  ];
+
+
+  environment.systemPackages = with pkgs; [
+    os-prober
+  ];
 }

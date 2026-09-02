@@ -1,56 +1,47 @@
-{ config, pkgs, ... }:{
+{ config, pkgs, ... }:
+{
+  imports = [
+    ./waybar.nix
+  ];
 
-    imports = [
-      ./waybar.nix # 引入同目录下的 waybar
-    ];
+  wayland.windowManager.hyprland = {
+    enable = true;
 
-  
+    extraConfig = ''
 
-    wayland.windowManager.hyprland = {
-      enable = true;
+      hl.on("hyprland.start", function()
+        hl.exec_cmd("waybar")
+      end)
 
-      settings = {
+      -- 应用启动
+      hl.bind("SUPER + T", hl.dsp.exec_cmd("alacritty"))
+      hl.bind("SUPER + B", hl.dsp.exec_cmd("google-chrome-stable"))
 
-        "$mod" = "SUPER"; 
-        "$terminal" = "alacritty";
-        "$browser" = "google-chrome-stable";
+      -- 窗口管理
+      hl.bind("SUPER + Q", hl.dsp.window.close())
+      hl.bind("SUPER + F", hl.dsp.window.fullscreen())
+      hl.bind("SUPER + V", hl.dsp.window.float())
 
+      -- 退出 Hyprland
+      hl.bind("SUPER + SHIFT + M", hl.dsp.exit())
 
-        bind = [
-          "$mod, T, exec, $terminal"
-          "$mod, B, exec, $browser"
+      -- 切换工作区
+      hl.bind("SUPER + 1", hl.dsp.focus({ workspace = 1 }))
+      hl.bind("SUPER + 2", hl.dsp.focus({ workspace = 2 }))
+      hl.bind("SUPER + 3", hl.dsp.focus({ workspace = 3 }))
+      hl.bind("SUPER + 4", hl.dsp.focus({ workspace = 4 }))
+      hl.bind("SUPER + 5", hl.dsp.focus({ workspace = 5 }))
 
+      -- 将窗口移动到对应工作区
+      hl.bind("SUPER + SHIFT + 1", hl.dsp.window.move({ workspace = 1 }))
+      hl.bind("SUPER + SHIFT + 2", hl.dsp.window.move({ workspace = 2 }))
+      hl.bind("SUPER + SHIFT + 3", hl.dsp.window.move({ workspace = 3 }))
+      hl.bind("SUPER + SHIFT + 4", hl.dsp.window.move({ workspace = 4 }))
+      hl.bind("SUPER + SHIFT + 5", hl.dsp.window.move({ workspace = 5 }))
 
-          "$mod, Q, killactive,"
-          "$mod, F, fullscreen, 0"
-          "$mod, V, togglefloating,"
-
-
-          "$mod SHIFT, M, exit,"
-
- 
-          "$mod, 1, workspace, 1"
-          "$mod, 2, workspace, 2"
-          "$mod, 3, workspace, 3"
-          "$mod, 4, workspace, 4"
-          "$mod, 5, workspace, 5"
-
-          # --- 将窗口移动到对应工作区 (Super + Shift + 1~9) ---
-          "$mod SHIFT, 1, movetoworkspace, 1"
-          "$mod SHIFT, 2, movetoworkspace, 2"
-          "$mod SHIFT, 3, movetoworkspace, 3"
-          "$mod SHIFT, 4, movetoworkspace, 4"
-          "$mod SHIFT, 5, movetoworkspace, 5"
-        ];
-
-
-        bindm = [
-          # 按住 Super + 鼠标左键：拖拽移动窗口
-          "$mod, mouse:272, movewindow"
-          # 按住 Super + 鼠标右键：拖拽缩放窗口大小
-          "$mod, mouse:273, resizewindow"
-        ];
-      };
-    };
-  
+      -- 鼠标绑定
+      hl.bind("SUPER + mouse:272", hl.dsp.window.drag())
+      hl.bind("SUPER + mouse:273", hl.dsp.window.resize())
+    '';
+  };
 }
